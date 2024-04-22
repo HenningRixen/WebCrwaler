@@ -1,19 +1,15 @@
 {
-  "name": "webcrwaler",
+  "name": "crawler",
   "version": "1.0.0",
-  "description": "Building web crwaler from scratch in node.js",
+  "description": "crawler laptop",
   "main": "index.js",
   "scripts": {
-    "start": "node main.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HenningRixen/WebCrwaler.git"
+    "start": "node main.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HenningRixen/WebCrwaler/issues"
-  },
-  "homepage": "https://github.com/HenningRixen/WebCrwaler#readme"
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
