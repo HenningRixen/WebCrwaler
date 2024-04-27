@@ -21,19 +21,25 @@ const getURLsFromHTML = (htmlBody, baseURL) => {
     
     // incrementing absoluteURL with the baseURL added with the relativ_URL to create absolute URL
     for (let i = 0; i < relative_URL.length; i++) {
-        if (relative_URL[i] === baseURL){
-            absolute_URL.push('/')
-        } else {
-            absolute_URL.push(baseURL + relative_URL[i])
+        let href = relative_URL[i].href;
+        if (!href.startsWith('http')) {
+            // If href is relative
+            if (baseURL.endsWith('/') && href.startsWith('/')) {
+                // If base URL ends with '/' and href starts with '/', remove one of the slashes
+                href = baseURL + href.slice(1);
+            } else {
+                href = baseURL + href;
+            }
         }
-    
+        absolute_URL.push(href);
+        
     }
-    
     return absolute_URL
+}
+
+function crawlPage(root_URl) {
     
-    
-    // loop through the list and add the base url to every element
-    
+
 }
 
 
