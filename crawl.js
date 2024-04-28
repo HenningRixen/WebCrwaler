@@ -37,15 +37,32 @@ const getURLsFromHTML = (htmlBody, baseURL) => {
     return absolute_URL
 }
 
-function crawlPage(root_URl) {
-    
 
+async function crawlPage(url) {
+    console.log('fetching url...')
+
+    let response
+    try {
+        response = await fetch(url)
+    } catch (err) {
+      throw new Error(`Network Error ${err.message}`)  
+    }
+    if (response.status > 399) {
+        console.log(`HTTP error: ${res.status} ${res.statusText}`)
+        return
+    }
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('text/html')) {
+        console.log(`No HTML-response; ${contentType}`)
+        return
+    }
+    console.log(await response.text())  
 }
-
 
 
 module.exports = {
     normalizeURL,
     getURLsFromHTML,
+    crawlPage,
   }
   
