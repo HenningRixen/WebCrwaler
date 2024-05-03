@@ -1,6 +1,9 @@
 const { test, expect } = require('@jest/globals')
 const { normalizeURL } = require('./crawl.js')
 const { getURLsFromHTML } = require('./crawl.js')
+const { sortPages } = require('./report.js')
+const { printReport } = require('./report.js')
+
 
 
 test('normalize https /', () => {
@@ -49,5 +52,43 @@ test('getURL handle error', () => {
   const baseURL = 'https://blog.boot.dev'
   const actual = getURLsFromHTML(baseURL, htmlBody)
   const expected = [ ]
+  expect(actual).toEqual(expected)
+})
+
+test('sort pages max first', () => {
+  const testobj = {
+    'lol': 2,
+    'test': 6,
+    'hi': 1,
+    'jetzt nicht': 10,
+  }
+  const actual = sortPages(testobj)
+  const expected = {
+    'jetzt nicht': 10,
+    'test': 6,
+    'lol': 2,
+    'hi': 1,
+  }
+  expect(actual).toEqual(expected)
+})
+
+test('sort pages double nums', () => {
+  const testobj = {
+    'lol': 2,
+    'test': 6,
+    'namalschaunwaserjetztmacht': 6,
+    'i': 6,
+    'hi': 1,
+    'jetzt nicht': 10,
+  }
+  const actual = sortPages(testobj)
+  const expected = {
+    'jetzt nicht': 10,
+    'namalschaunwaserjetztmacht': 6,
+    'test': 6,
+    'i': 6,
+    'lol': 2,
+    'hi': 1,
+  }
   expect(actual).toEqual(expected)
 })
